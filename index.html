@@ -27,8 +27,9 @@
             background: #ffffff;
             color: #111111;
 
+            /* Subtle page entrance */
             opacity: 0;
-            animation: pageFadeIn 0.8s ease forwards;
+            animation: pageFadeIn 0.7s ease forwards;
         }
 
         @keyframes pageFadeIn {
@@ -103,30 +104,7 @@
             width: 100%;
             height: auto;
             display: block;
-
             cursor: pointer;
-
-            opacity: 0;
-            transform: translateY(15px);
-
-            transition:
-                opacity 0.7s ease,
-                transform 0.7s ease;
-        }
-
-        .gallery img.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Very subtle effect on desktop */
-
-        @media (min-width: 701px) {
-
-            .gallery img.visible:hover {
-                transform: scale(1.01);
-            }
-
         }
 
 
@@ -211,7 +189,6 @@
             line-height: 1;
 
             cursor: pointer;
-
             user-select: none;
         }
 
@@ -278,12 +255,6 @@
                 animation: none;
                 opacity: 1;
             }
-
-            .gallery img {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
         }
 
     </style>
@@ -311,9 +282,7 @@
 <main>
 
 
-    <!-- =========================
-         STUDIES
-    ========================== -->
+    <!-- STUDIES -->
 
     <section>
 
@@ -351,9 +320,7 @@
     </section>
 
 
-    <!-- =========================
-         SKETCHES
-    ========================== -->
+    <!-- SKETCHES -->
 
     <section>
 
@@ -391,9 +358,7 @@
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================== -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -408,9 +373,7 @@
 </footer>
 
 
-<!-- =========================
-     LIGHTBOX
-========================== -->
+<!-- LIGHTBOX -->
 
 <div class="lightbox" id="lightbox">
 
@@ -423,53 +386,11 @@
 </div>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================== -->
+<!-- JAVASCRIPT -->
 
 <script>
 
-    /* -------------------------
-       IMAGE REVEAL ON SCROLL
-    ------------------------- */
-
     const galleryImages = document.querySelectorAll('.gallery img');
-
-    const imageObserver = new IntersectionObserver(
-
-        function(entries, observer) {
-
-            entries.forEach(function(entry) {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add('visible');
-
-                    observer.unobserve(entry.target);
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold: 0.1
-        }
-
-    );
-
-
-    galleryImages.forEach(function(image) {
-
-        imageObserver.observe(image);
-
-    });
-
-
-    /* -------------------------
-       LIGHTBOX
-    ------------------------- */
 
     const lightbox = document.getElementById('lightbox');
 
@@ -504,6 +425,8 @@
     }
 
 
+    /* Click an image */
+
     galleryImages.forEach(function(image) {
 
         image.addEventListener('click', function() {
@@ -515,7 +438,7 @@
     });
 
 
-    /* Click outside the image */
+    /* Click outside the enlarged image */
 
     lightbox.addEventListener('click', function(event) {
 
@@ -537,7 +460,7 @@
     });
 
 
-    /* Escape key */
+    /* Press Escape */
 
     document.addEventListener('keydown', function(event) {
 
