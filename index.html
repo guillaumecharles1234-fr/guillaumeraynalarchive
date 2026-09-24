@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Guillaume Raynal — Concept Art — Illustration</title>
+    <title>Guillaume Raynal — Concept Art / Illustration</title>
 
     <style>
+
+        /* =========================
+           BASIC
+        ========================= */
+
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -17,7 +26,25 @@
             font-family: Arial, Helvetica, sans-serif;
             background: #ffffff;
             color: #111111;
+
+            opacity: 0;
+            animation: pageFadeIn 0.8s ease forwards;
         }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
 
         header {
             max-width: 1200px;
@@ -41,6 +68,11 @@
             color: #888888;
         }
 
+
+        /* =========================
+           MAIN
+        ========================= */
+
         main {
             max-width: 1200px;
             margin: auto;
@@ -56,6 +88,11 @@
             margin-bottom: 30px;
         }
 
+
+        /* =========================
+           GALLERY
+        ========================= */
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -66,8 +103,36 @@
             width: 100%;
             height: auto;
             display: block;
+
             cursor: pointer;
+
+            opacity: 0;
+            transform: translateY(15px);
+
+            transition:
+                opacity 0.7s ease,
+                transform 0.7s ease;
         }
+
+        .gallery img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Very subtle effect on desktop */
+
+        @media (min-width: 701px) {
+
+            .gallery img.visible:hover {
+                transform: scale(1.01);
+            }
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
             max-width: 1200px;
@@ -90,45 +155,70 @@
         }
 
 
-        /* LIGHTBOX */
+        /* =========================
+           LIGHTBOX
+        ========================= */
 
         .lightbox {
             display: none;
+
             position: fixed;
             z-index: 1000;
+
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+
+            background: rgba(0, 0, 0, 0.92);
+
             align-items: center;
             justify-content: center;
+
             padding: 30px;
+
             cursor: pointer;
         }
 
+        .lightbox.active {
+            display: flex;
+        }
+
         .lightbox img {
-            max-width: 95%;
-            max-height: 95%;
+            max-width: 95vw;
+            max-height: 92vh;
+
             width: auto;
             height: auto;
+
             object-fit: contain;
+
             cursor: default;
         }
 
         .lightbox-close {
             position: absolute;
+
             top: 20px;
             right: 30px;
+
             color: #ffffff;
+
             font-size: 36px;
             font-weight: 300;
-            cursor: pointer;
+
             line-height: 1;
+
+            cursor: pointer;
+
+            user-select: none;
         }
 
 
-        /* MOBILE */
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 700px) {
 
@@ -140,6 +230,10 @@
                 margin-bottom: 50px;
             }
 
+            h1 {
+                font-size: 28px;
+            }
+
             .gallery {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -149,13 +243,17 @@
                 margin-bottom: 70px;
             }
 
+            footer {
+                margin-top: 70px;
+            }
+
             .lightbox {
                 padding: 15px;
             }
 
             .lightbox img {
                 max-width: 100%;
-                max-height: 90%;
+                max-height: 90vh;
             }
 
             .lightbox-close {
@@ -164,24 +262,61 @@
                 font-size: 32px;
             }
         }
+
+
+        /* =========================
+           REDUCED MOTION
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            body {
+                animation: none;
+                opacity: 1;
+            }
+
+            .gallery img {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
     </style>
 </head>
 
 
 <body>
 
+
 <header>
+
     <h1>Guillaume Raynal</h1>
-    <div class="subtitle">Concept Art · Illustration</div>   
-    <div class="note">All work shown here was created without generative AI.</div>
+
+    <div class="subtitle">
+        Concept Art · Illustration
+    </div>
+
+    <div class="note">
+        All work shown here was created without generative AI.
+    </div>
+
 </header>
 
 
 <main>
 
-    <!-- STUDIES -->
+
+    <!-- =========================
+         STUDIES
+    ========================== -->
 
     <section>
+
         <h2>Studies</h2>
 
         <div class="gallery">
@@ -212,12 +347,16 @@
             <img src="Studies/24.jpg" alt="Digital art study 24">
 
         </div>
+
     </section>
 
 
-    <!-- SKETCHES -->
+    <!-- =========================
+         SKETCHES
+    ========================== -->
 
     <section>
+
         <h2>Sketches</h2>
 
         <div class="gallery">
@@ -245,12 +384,16 @@
             <img src="Sketches/21.jpg" alt="Sketch 21">
 
         </div>
+
     </section>
+
 
 </main>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================== -->
 
 <footer>
 
@@ -265,7 +408,9 @@
 </footer>
 
 
-<!-- LIGHTBOX -->
+<!-- =========================
+     LIGHTBOX
+========================== -->
 
 <div class="lightbox" id="lightbox">
 
@@ -278,60 +423,127 @@
 </div>
 
 
-<!-- JAVASCRIPT -->
+<!-- =========================
+     JAVASCRIPT
+========================== -->
 
 <script>
 
+    /* -------------------------
+       IMAGE REVEAL ON SCROLL
+    ------------------------- */
+
     const galleryImages = document.querySelectorAll('.gallery img');
+
+    const imageObserver = new IntersectionObserver(
+
+        function(entries, observer) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add('visible');
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.1
+        }
+
+    );
+
+
+    galleryImages.forEach(function(image) {
+
+        imageObserver.observe(image);
+
+    });
+
+
+    /* -------------------------
+       LIGHTBOX
+    ------------------------- */
 
     const lightbox = document.getElementById('lightbox');
 
-    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxImage =
+        document.getElementById('lightboxImage');
 
-    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxClose =
+        document.getElementById('lightboxClose');
+
+
+    function openLightbox(image) {
+
+        lightboxImage.src = image.src;
+
+        lightboxImage.alt = image.alt;
+
+        lightbox.classList.add('active');
+
+        document.body.style.overflow = 'hidden';
+
+    }
+
+
+    function closeLightbox() {
+
+        lightbox.classList.remove('active');
+
+        lightboxImage.src = '';
+
+        document.body.style.overflow = '';
+
+    }
 
 
     galleryImages.forEach(function(image) {
 
         image.addEventListener('click', function() {
 
-            lightboxImage.src = image.src;
-
-            lightboxImage.alt = image.alt;
-
-            lightbox.style.display = 'flex';
-
-            document.body.style.overflow = 'hidden';
+            openLightbox(image);
 
         });
 
     });
 
 
+    /* Click outside the image */
+
     lightbox.addEventListener('click', function(event) {
 
-        if (event.target === lightbox || event.target === lightboxClose) {
+        if (event.target === lightbox) {
 
-            lightbox.style.display = 'none';
-
-            lightboxImage.src = '';
-
-            document.body.style.overflow = '';
+            closeLightbox();
 
         }
 
     });
 
 
+    /* Click X */
+
+    lightboxClose.addEventListener('click', function() {
+
+        closeLightbox();
+
+    });
+
+
+    /* Escape key */
+
     document.addEventListener('keydown', function(event) {
 
         if (event.key === 'Escape') {
 
-            lightbox.style.display = 'none';
-
-            lightboxImage.src = '';
-
-            document.body.style.overflow = '';
+            closeLightbox();
 
         }
 
