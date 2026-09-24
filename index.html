@@ -89,7 +89,8 @@
             margin-top: 12px;
         }
 
-        /* Lightbox */
+
+        /* LIGHTBOX */
 
         .lightbox {
             display: none;
@@ -126,7 +127,11 @@
             line-height: 1;
         }
 
+
+        /* MOBILE */
+
         @media (max-width: 700px) {
+
             body {
                 padding: 20px;
             }
@@ -162,6 +167,7 @@
     </style>
 </head>
 
+
 <body>
 
 <header>
@@ -170,7 +176,10 @@
     <div class="note">All work shown here was created without generative AI.</div>
 </header>
 
+
 <main>
+
+    <!-- STUDIES -->
 
     <section>
         <h2>Studies</h2>
@@ -205,6 +214,9 @@
         </div>
     </section>
 
+
+    <!-- SKETCHES -->
+
     <section>
         <h2>Sketches</h2>
 
@@ -237,7 +249,11 @@
 
 </main>
 
+
+<!-- FOOTER -->
+
 <footer>
+
     <a href="mailto:guillaumeraynal.contact@gmail.com">
         guillaumeraynal.contact@gmail.com
     </a>
@@ -245,42 +261,84 @@
     <div class="copyright">
         © 2026 Guillaume Raynal
     </div>
+
 </footer>
 
-<!-- Lightbox -->
+
+<!-- LIGHTBOX -->
+
 <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" id="lightboxClose">&times;</span>
+
+    <span class="lightbox-close" id="lightboxClose">
+        &times;
+    </span>
+
     <img id="lightboxImage" src="" alt="">
+
 </div>
 
+
+<!-- JAVASCRIPT -->
+
 <script>
+
     const galleryImages = document.querySelectorAll('.gallery img');
+
     const lightbox = document.getElementById('lightbox');
+
     const lightboxImage = document.getElementById('lightboxImage');
+
     const lightboxClose = document.getElementById('lightboxClose');
 
+
     galleryImages.forEach(function(image) {
+
         image.addEventListener('click', function() {
+
             lightboxImage.src = image.src;
+
             lightboxImage.alt = image.alt;
+
             lightbox.style.display = 'flex';
+
+            document.body.style.overflow = 'hidden';
+
         });
+
     });
+
 
     lightbox.addEventListener('click', function(event) {
+
         if (event.target === lightbox || event.target === lightboxClose) {
+
             lightbox.style.display = 'none';
+
             lightboxImage.src = '';
+
+            document.body.style.overflow = '';
+
         }
+
     });
 
+
     document.addEventListener('keydown', function(event) {
+
         if (event.key === 'Escape') {
+
             lightbox.style.display = 'none';
+
             lightboxImage.src = '';
+
+            document.body.style.overflow = '';
+
         }
+
     });
+
 </script>
+
 
 </body>
 </html>
