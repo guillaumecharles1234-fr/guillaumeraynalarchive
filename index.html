@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Guillaume Raynal — Concept Art / Illustration</title>
+    <title>Guillaume Raynal — Concept Art / Illustration</title>
 
 <style>
 
@@ -284,7 +284,7 @@
 
         /* =========================
            MOBILE GALLERY
-           ========================= */
+        ========================= */
 
         .gallery {
             grid-template-columns: 1fr;
@@ -312,7 +312,7 @@
 
         /* =========================
            FOOTER
-           ========================= */
+        ========================= */
 
         footer {
             margin-top: 70px;
@@ -322,7 +322,7 @@
 
         /* =========================
            MOBILE LIGHTBOX
-           ========================= */
+        ========================= */
 
         .lightbox {
 
@@ -371,7 +371,7 @@
 
         /* =========================
            MOBILE CLOSE BUTTON
-           ========================= */
+        ========================= */
 
         .lightbox-close {
 
@@ -421,18 +421,18 @@
 
 <header>
 
-<h1>Guillaume Raynal</h1>
+    <h1>Guillaume Raynal</h1>
 
-<div class="subtitle">
-    Concept Art · Illustration
-</div>
+    <div class="subtitle">
+        Concept Art · Illustration
+    </div>
 
-<div class="contact">
-    M ·
-    <a href="mailto:guillaumeraynal.contact@gmail.com">
-        guillaumeraynal.contact@gmail.com
-    </a>
-</div>
+    <div class="contact">
+        M ·
+        <a href="mailto:guillaumeraynal.contact@gmail.com">
+            guillaumeraynal.contact@gmail.com
+        </a>
+    </div>
 
 </header>
 
@@ -516,23 +516,23 @@
 
 </main>
 
+
 <!-- =========================
      FOOTER
 ========================== -->
 
 <footer>
 
-```
-<div class="ai-note">
-    All work shown here was created without generative AI.
-</div>
+    <div class="ai-note">
+        All work shown here was created without generative AI.
+    </div>
 
-<div class="copyright">
-    © 2026 Guillaume Raynal
-</div>
-```
+    <div class="copyright">
+        © 2026 Guillaume Raynal
+    </div>
 
 </footer>
+
 
 <!-- =========================
      LIGHTBOX
@@ -544,22 +544,23 @@
     aria-hidden="true"
 >
 
-<span
-    class="lightbox-close"
-    id="lightboxClose"
-    aria-label="Close image"
-    role="button"
->
-    &times;
-</span>
+    <span
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close image"
+        role="button"
+    >
+        &times;
+    </span>
 
-<img
-    id="lightboxImage"
-    src=""
-    alt=""
->
+    <img
+        id="lightboxImage"
+        src=""
+        alt=""
+    >
 
 </div>
+
 
 <!-- =========================
      JAVASCRIPT
@@ -582,7 +583,7 @@
 
     /* =========================
        OPEN LIGHTBOX
-       ========================= */
+    ========================= */
 
     function openLightbox(image) {
 
@@ -600,7 +601,7 @@
 
     /* =========================
        CLOSE LIGHTBOX
-       ========================= */
+    ========================= */
 
     function closeLightbox() {
 
@@ -625,7 +626,7 @@
 
     /* =========================
        IMAGE CLICK
-       ========================= */
+    ========================= */
 
     galleryImages.forEach(function(image) {
 
@@ -640,7 +641,7 @@
 
     /* =========================
        BACKGROUND CLICK
-       ========================= */
+    ========================= */
 
     lightbox.addEventListener('click', function(event) {
 
@@ -655,7 +656,7 @@
 
     /* =========================
        CLOSE BUTTON
-       ========================= */
+    ========================= */
 
     lightboxClose.addEventListener('click', function(event) {
 
@@ -668,7 +669,7 @@
 
     /* =========================
        ESCAPE KEY
-       ========================= */
+    ========================= */
 
     document.addEventListener('keydown', function(event) {
 
@@ -686,7 +687,7 @@
 
     /* =========================
        MOBILE SWIPE DOWN
-       ========================= */
+    ========================= */
 
     let startY = 0;
     let currentY = 0;
@@ -765,7 +766,7 @@
 
     /* =========================
        MOBILE SWIPE END
-       ========================= */
+    ========================= */
 
     lightbox.addEventListener(
         'touchend',
@@ -844,7 +845,7 @@
 
     /* =========================
        TOUCH CANCEL
-       ========================= */
+    ========================= */
 
     lightbox.addEventListener(
         'touchcancel',
