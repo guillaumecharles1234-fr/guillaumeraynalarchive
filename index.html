@@ -1,14 +1,21 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f7f4">
+
 <title>Guillaume Raynal — Concept Art · Illustration</title>
+<meta name="description" content="Portfolio of Guillaume Raynal, concept art and illustration.">
 
 <style>
 * {
   box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -18,15 +25,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
+header,
+.gallery,
+footer {
+  width: 100%;
+  max-width: 1156px;
+  margin-inline: auto;
+}
+
 header {
-  max-width: 1100px;
-  margin: 0 auto;
   padding: 48px 28px 32px;
 }
 
 h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: clamp(25px, 3vw, 28px);
   font-weight: 500;
   letter-spacing: -0.7px;
 }
@@ -40,54 +57,64 @@ h1 {
 .contact {
   margin-top: 18px;
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 
-.contact a {
+.email {
   color: inherit;
-  text-decoration: none;
-  border-bottom: none;
+  user-select: text;
 }
 
 .gallery {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 28px 60px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
+  padding: 0 28px 60px;
 }
 
 .gallery img {
   display: block;
   width: 100%;
   height: auto;
-  cursor: zoom-in;
+  cursor: pointer;
   opacity: 0;
-  animation: fadeIn 0.7s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gallery img:hover {
+  opacity: 0.88;
+}
+
+.gallery img:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 4px;
 }
 
 @keyframes fadeIn {
-  to { opacity: 1; }
+  to {
+    opacity: 1;
+  }
 }
 
 footer {
-  max-width: 1100px;
-  margin: 0 auto;
   padding: 0 28px 35px;
   color: #888;
   font-size: 12px;
   line-height: 1.8;
 }
 
+/* Full-screen image viewer */
+
 #lightbox {
   display: none;
   position: fixed;
   z-index: 1000;
   inset: 0;
-  background: rgba(15, 15, 15, 0.94);
+  background: rgba(15, 15, 15, 0.95);
   align-items: center;
   justify-content: center;
-  padding: 50px 24px;
+  padding: 54px 24px 24px;
   touch-action: pan-y;
 }
 
@@ -95,23 +122,40 @@ footer {
   display: flex;
 }
 
-#lightbox img {
+#lightbox-image {
+  display: block;
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  cursor: zoom-out;
+  cursor: pointer;
 }
 
 #lightbox-close {
   position: absolute;
-  top: 18px;
-  right: 24px;
+  top: 12px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
   color: white;
-  background: none;
-  border: none;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
   font-size: 32px;
   font-weight: 300;
   cursor: pointer;
+}
+
+#lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#lightbox-close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 @media (max-width: 650px) {
@@ -121,8 +165,8 @@ footer {
 
   .gallery {
     grid-template-columns: 1fr;
-    padding: 0 18px 40px;
     gap: 18px;
+    padding: 0 18px 40px;
   }
 
   footer {
@@ -130,7 +174,22 @@ footer {
   }
 
   #lightbox {
-    padding: 45px 12px;
+    padding: 52px 10px 16px;
+  }
+
+  #lightbox-close {
+    top: 5px;
+    right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }
 </style>
@@ -141,62 +200,98 @@ footer {
 <header>
   <h1>Guillaume Raynal</h1>
   <div class="subtitle">Concept Art · Illustration</div>
+
   <div class="contact">
-    M : <a href="mailto:guillaumeraynal.contact@gmail.com">guillaumeraynal.contact@gmail.com</a>
+    M : <span class="email">guillaumeraynal.contact@gmail.com</span>
   </div>
 </header>
 
-<main class="gallery" id="gallery"></main>
+<main class="gallery" id="gallery"
+      aria-label="Concept art and illustration portfolio"></main>
 
 <footer>
   <div>All work shown here was created without generative AI.</div>
   <div>© 2026 Guillaume Raynal</div>
 </footer>
 
-<div id="lightbox" aria-label="Image viewer">
-  <button id="lightbox-close" aria-label="Close image">&times;</button>
+<div id="lightbox"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Image viewer">
+
+  <button id="lightbox-close" type="button"
+          aria-label="Close image viewer">&times;</button>
+
   <img id="lightbox-image" src="" alt="">
 </div>
 
 <script>
 const totalImages = 3;
 const gallery = document.getElementById('gallery');
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const closeButton = document.getElementById('lightbox-close');
+
+let previousFocus = null;
 
 for (let i = totalImages; i >= 1; i--) {
   const image = document.createElement('img');
+
   image.src = `images/${i}.jpg`;
   image.alt = `Concept art and illustration ${i}`;
   image.loading = 'lazy';
-  image.style.animationDelay = `${(totalImages - i) * 0.08}s`;
+  image.decoding = 'async';
+  image.tabIndex = 0;
+  image.setAttribute('role', 'button');
+  image.setAttribute('aria-label', `Enlarge artwork ${i}`);
+  image.style.animationDelay =
+    `${(totalImages - i) * 0.08}s`;
 
   image.addEventListener('click', () => {
-    openLightbox(image.src, image.alt);
+    openLightbox(image);
+  });
+
+  image.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openLightbox(image);
+    }
   });
 
   gallery.appendChild(image);
 }
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightbox-image');
-const closeButton = document.getElementById('lightbox-close');
+function openLightbox(image) {
+  previousFocus = image;
 
-function openLightbox(src, alt) {
-  lightboxImage.src = src;
-  lightboxImage.alt = alt;
+  lightboxImage.src = image.src;
+  lightboxImage.alt = image.alt;
+
   lightbox.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('lightbox-open');
+
+  closeButton.focus();
 }
 
 function closeLightbox() {
+  if (!lightbox.classList.contains('open')) return;
+
   lightbox.classList.remove('open');
+  document.body.classList.remove('lightbox-open');
+
   lightboxImage.src = '';
-  document.body.style.overflow = '';
+  lightboxImage.alt = '';
+
+  if (previousFocus) {
+    previousFocus.focus();
+  }
 }
 
 closeButton.addEventListener('click', closeLightbox);
 
 lightbox.addEventListener('click', (event) => {
-  if (event.target === lightbox || event.target === lightboxImage) {
+  if (event.target === lightbox ||
+      event.target === lightboxImage) {
     closeLightbox();
   }
 });
@@ -216,7 +311,7 @@ lightbox.addEventListener('touchstart', (event) => {
 lightbox.addEventListener('touchend', (event) => {
   const touchEndY = event.changedTouches[0].screenY;
 
-  if (touchEndY - touchStartY > 100) {
+  if (touchEndY - touchStartY > 120) {
     closeLightbox();
   }
 }, { passive: true });
@@ -224,4 +319,3 @@ lightbox.addEventListener('touchend', (event) => {
 
 </body>
 </html>
-```
