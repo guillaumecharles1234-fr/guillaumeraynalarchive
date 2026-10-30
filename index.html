@@ -24,8 +24,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* HEADER */
-
     header {
       max-width: 1156px;
       margin: 0 auto;
@@ -44,14 +42,12 @@
       font-size: 28px;
       line-height: 1.2;
       font-weight: 400;
-      letter-spacing: 0;
     }
 
     .subtitle {
       margin: 8px 0 0;
       font-size: 13px;
       line-height: 1.5;
-      font-weight: 400;
       color: #666;
     }
 
@@ -61,8 +57,6 @@
       color: #777;
       white-space: nowrap;
     }
-
-    /* CATEGORY NAVIGATION */
 
     .category-nav {
       display: flex;
@@ -88,8 +82,6 @@
     .category-button.active {
       color: #222;
     }
-
-    /* GALLERY */
 
     .gallery {
       display: grid;
@@ -192,8 +184,6 @@
       right: 15px;
     }
 
-    /* FOOTER */
-
     footer {
       max-width: 1156px;
       margin: 0 auto;
@@ -295,6 +285,7 @@
       <button class="category-button" data-category="illustration">Illustration</button>
       <button class="category-button" data-category="studies">Studies</button>
       <button class="category-button" data-category="sketches">Sketches</button>
+      <button class="category-button" data-category="gestures">Gestures</button>
     </nav>
   </header>
 
@@ -317,16 +308,20 @@
   </div>
 
   <script>
+    // Exact image ranges in each folder
+
     const categories = {
-      illustration: 7,
-      studies: 25,
-      sketches: 64
+      illustration: { first: 1, last: 7 },
+      studies:      { first: 1, last: 25 },
+      sketches:     { first: 1, last: 15 },
+      gestures:     { first: 12, last: 46 }
     };
 
     const categoryOrder = [
       "illustration",
       "studies",
-      "sketches"
+      "sketches",
+      "gestures"
     ];
 
     const gallery = document.getElementById("gallery");
@@ -342,11 +337,14 @@
 
     function getImages(category) {
       const images = [];
+
       const selectedCategories =
         category === "all" ? categoryOrder : [category];
 
       selectedCategories.forEach(name => {
-        for (let i = categories[name]; i >= 1; i--) {
+        const range = categories[name];
+
+        for (let i = range.last; i >= range.first; i--) {
           images.push({
             category: name,
             src: `${name}/${i}.webp`
@@ -441,7 +439,7 @@
       if (event.key === "ArrowLeft") showPrevious();
     });
 
-    /* Swipe down to close on mobile */
+    // Swipe down to close on mobile
 
     let touchStartY = 0;
 
@@ -457,6 +455,8 @@
         closeLightbox();
       }
     }, { passive: true });
+
+    // Initial gallery
 
     displayGallery("all");
   </script>
