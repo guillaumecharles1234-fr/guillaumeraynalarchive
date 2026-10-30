@@ -286,6 +286,7 @@ const categories = {
 };
 
 const gallery = document.getElementById('gallery');
+
 const navigationButtons =
   document.querySelectorAll('.navigation button');
 
@@ -297,7 +298,7 @@ let previousFocus = null;
 
 // Create image list
 function getImages(category) {
-  let images = [];
+  const images = [];
 
   const selectedCategories =
     category === 'all'
@@ -307,7 +308,7 @@ function getImages(category) {
   selectedCategories.forEach(name => {
     for (let i = categories[name]; i >= 1; i--) {
       images.push({
-        src: `images/${name}/${i}.jpg`,
+        src: `images/${name}/${i}.webp`,
         category: name,
         number: i
       });
