@@ -2,437 +2,488 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f8f7f4">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guillaume Raynal — Concept Art and Illustration">
+  <title>Guillaume Raynal — Concept Art / Illustration</title>
 
-<title>Guillaume Raynal — Concept Art · Illustration</title>
-<meta name="description" content="Portfolio of Guillaume Raynal, concept art and illustration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-html {
-  -webkit-text-size-adjust: 100%;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-  margin: 0;
-  background: #f8f7f4;
-  color: #222;
-  font-family: Arial, Helvetica, sans-serif;
-}
+    body {
+      margin: 0;
+      background: #f8f7f4;
+      color: #222;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-body.lightbox-open {
-  overflow: hidden;
-}
+    /* HEADER */
 
-header,
-.gallery,
-footer {
-  width: 100%;
-  max-width: 1156px;
-  margin-inline: auto;
-}
+    header {
+      max-width: 1156px;
+      margin: 0 auto;
+      padding: 52px 28px 0;
+    }
 
-header {
-  padding: 48px 28px 32px;
-}
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
 
-h1 {
-  margin: 0;
-  font-size: clamp(25px, 3vw, 28px);
-  font-weight: 500;
-  letter-spacing: -0.7px;
-}
+    .identity h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -1.8px;
+    }
 
-.subtitle {
-  margin-top: 7px;
-  color: #777;
-  font-size: 14px;
-}
+    .subtitle {
+      margin: 12px 0 0;
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: #555;
+    }
 
-.contact {
-  margin-top: 18px;
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
+    .email {
+      margin-top: 7px;
+      font-size: 13px;
+      color: #777;
+      white-space: nowrap;
+    }
 
-.email {
-  color: inherit;
-  user-select: text;
-}
+    /* CATEGORY NAVIGATION */
 
-/* Category navigation */
+    .category-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-top: 52px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #dedcd7;
+    }
 
-.navigation {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 32px;
-}
+    .category-button {
+      position: relative;
+      padding: 0 0 5px;
+      border: none;
+      background: transparent;
+      color: #898781;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
 
-.navigation button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #888;
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
+    .category-button:hover {
+      color: #222;
+    }
 
-.navigation button:hover {
-  color: #222;
-}
+    .category-button.active {
+      color: #222;
+      font-weight: 700;
+    }
 
-.navigation button.active {
-  color: #222;
-  font-weight: 600;
-}
+    .category-button.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -17px;
+      height: 2px;
+      background: #222;
+    }
 
-.navigation button:focus-visible {
-  outline: 2px solid #555;
-  outline-offset: 5px;
-}
+    /* GALLERY */
 
-/* Single-column gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1156px;
+      margin: 0 auto;
+      padding: 28px 28px 60px;
+    }
 
-.gallery {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
-  padding: 0 28px 60px;
-}
+    .gallery-item {
+      width: 100%;
+      margin: 0;
+      animation: fadeIn 0.45s ease both;
+    }
 
-.gallery img {
-  display: block;
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-  -webkit-tap-highlight-color: transparent;
-}
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      background: #eeece7;
+    }
 
-.gallery img:hover {
-  opacity: 0.88;
-}
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.gallery img:focus-visible {
-  outline: 2px solid #555;
-  outline-offset: 4px;
-}
+    /* LIGHTBOX */
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      background: rgba(15, 15, 15, 0.96);
+    }
 
-footer {
-  padding: 0 28px 35px;
-  color: #888;
-  font-size: 12px;
-  line-height: 1.8;
-}
+    .lightbox.open {
+      display: flex;
+    }
 
-/* Full-screen image viewer */
+    .lightbox img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+    }
 
-#lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background: rgba(15, 15, 15, 0.95);
-  align-items: center;
-  justify-content: center;
-  padding: 54px 24px 24px;
-  touch-action: pan-y;
-}
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      border: none;
+      background: transparent;
+      color: white;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
 
-#lightbox.open {
-  display: flex;
-}
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      opacity: 1;
+    }
 
-#lightbox-image {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  cursor: pointer;
-}
+    .lightbox-close {
+      top: 20px;
+      right: 28px;
+      font-size: 34px;
+      font-weight: 300;
+    }
 
-#lightbox-close {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  color: white;
-  background: transparent;
-  border: 0;
-  border-radius: 4px;
-  font-size: 32px;
-  font-weight: 300;
-  cursor: pointer;
-}
+    .lightbox-prev,
+    .lightbox-next {
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px;
+      font-size: 38px;
+    }
 
-#lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
+    .lightbox-prev {
+      left: 15px;
+    }
 
-#lightbox-close:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 2px;
-}
+    .lightbox-next {
+      right: 15px;
+    }
 
-@media (max-width: 650px) {
-  header {
-    padding: 32px 18px 26px;
-  }
+    /* FOOTER */
 
-  .navigation {
-    gap: 20px;
-    margin-top: 26px;
-  }
+    footer {
+      max-width: 1156px;
+      margin: 0 auto;
+      padding: 20px 28px 36px;
+      border-top: 1px solid #dedcd7;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #898781;
+      font-size: 11px;
+      line-height: 1.6;
+    }
 
-  .gallery {
-    gap: 18px;
-    padding: 0 18px 40px;
-  }
+    /* MOBILE */
 
-  footer {
-    padding: 0 18px 28px;
-  }
+    @media (max-width: 600px) {
+      header {
+        padding: 34px 18px 0;
+      }
 
-  #lightbox {
-    padding: 52px 10px 16px;
-  }
+      .header-top {
+        flex-direction: column;
+        gap: 12px;
+      }
 
-  #lightbox-close {
-    top: 5px;
-    right: 8px;
-  }
-}
+      .identity h1 {
+        font-size: 31px;
+      }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
-}
-</style>
+      .subtitle {
+        margin-top: 10px;
+        font-size: 10px;
+        letter-spacing: 1.8px;
+      }
+
+      .email {
+        margin-top: 0;
+        font-size: 12px;
+      }
+
+      .category-nav {
+        gap: 20px;
+        margin-top: 36px;
+        overflow-x: auto;
+      }
+
+      .category-button {
+        font-size: 10px;
+        white-space: nowrap;
+      }
+
+      .gallery {
+        gap: 14px;
+        padding: 20px 18px 40px;
+      }
+
+      .lightbox {
+        padding: 15px;
+      }
+
+      .lightbox-close {
+        top: 12px;
+        right: 16px;
+      }
+
+      .lightbox-prev {
+        left: 0;
+      }
+
+      .lightbox-next {
+        right: 0;
+      }
+
+      footer {
+        flex-direction: column;
+        padding: 18px;
+        gap: 6px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Guillaume Raynal</h1>
-  <div class="subtitle">Concept Art · Illustration</div>
+  <header>
+    <div class="header-top">
+      <div class="identity">
+        <h1>Guillaume Raynal</h1>
+        <p class="subtitle">Concept Art · Illustration</p>
+      </div>
 
-  <div class="contact">
-    M : <span class="email">guillaumeraynal.contact@gmail.com</span>
+      <div class="email">
+        guillaumeraynal.contact@gmail.com
+      </div>
+    </div>
+
+    <nav class="category-nav" aria-label="Portfolio categories">
+      <button class="category-button active" data-category="all">All</button>
+      <button class="category-button" data-category="illustration">Illustration</button>
+      <button class="category-button" data-category="studies">Studies</button>
+      <button class="category-button" data-category="sketches">Sketches</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="gallery" id="gallery" aria-label="Portfolio gallery"></section>
+  </main>
+
+  <footer>
+    <span>All work shown here was created without generative AI.</span>
+    <span>© 2026 Guillaume Raynal</span>
+  </footer>
+
+  <!-- LIGHTBOX -->
+
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+    <img id="lightboxImage" src="" alt="">
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next image">&#8250;</button>
   </div>
 
-  <nav class="navigation" aria-label="Portfolio categories">
-    <button class="active" data-category="all"
-            aria-pressed="true">All</button>
-    <button data-category="illustration"
-            aria-pressed="false">Illustration</button>
-    <button data-category="studies"
-            aria-pressed="false">Studies</button>
-    <button data-category="sketches"
-            aria-pressed="false">Sketches</button>
-  </nav>
-</header>
+  <script>
+    const categories = {
+      illustration: 7,
+      studies: 25,
+      sketches: 64
+    };
 
-<main class="gallery" id="gallery"
-      aria-label="Portfolio gallery"></main>
+    const categoryOrder = [
+      "illustration",
+      "studies",
+      "sketches"
+    ];
 
-<footer>
-  <div>All work shown here was created without generative AI.</div>
-  <div>© 2026 Guillaume Raynal</div>
-</footer>
+    const gallery = document.getElementById("gallery");
+    const categoryButtons = document.querySelectorAll(".category-button");
 
-<div id="lightbox"
-     role="dialog"
-     aria-modal="true"
-     aria-label="Image viewer">
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
 
-  <button id="lightbox-close" type="button"
-          aria-label="Close image viewer">&times;</button>
+    let currentImages = [];
+    let currentIndex = 0;
 
-  <img id="lightbox-image" src="" alt="">
-</div>
+    function getImages(category) {
+      const images = [];
+      const selectedCategories =
+        category === "all" ? categoryOrder : [category];
 
-<script>
+      selectedCategories.forEach(name => {
+        for (let i = categories[name]; i >= 1; i--) {
+          images.push({
+            category: name,
+            src: `images/${name}/${i}.webp`
+          });
+        }
+      });
 
-// Image counts
-const categories = {
-  illustration: 7,
-  studies: 25,
-  sketches: 64
-};
+      return images;
+    }
 
-const gallery = document.getElementById('gallery');
+    function displayGallery(category = "all") {
+      gallery.innerHTML = "";
+      currentImages = getImages(category);
 
-const navigationButtons =
-  document.querySelectorAll('.navigation button');
+      currentImages.forEach((image, index) => {
+        const figure = document.createElement("figure");
+        figure.className = "gallery-item";
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightbox-image');
-const closeButton = document.getElementById('lightbox-close');
+        const img = document.createElement("img");
+        img.src = image.src;
+        img.alt = `${image.category} artwork`;
+        img.loading = "lazy";
+        img.decoding = "async";
 
-let previousFocus = null;
+        img.addEventListener("click", () => {
+          openLightbox(index);
+        });
 
-// Create image list
-function getImages(category) {
-  const images = [];
-
-  const selectedCategories =
-    category === 'all'
-      ? ['illustration', 'studies', 'sketches']
-      : [category];
-
-  selectedCategories.forEach(name => {
-    for (let i = categories[name]; i >= 1; i--) {
-      images.push({
-        src: `images/${name}/${i}.webp`,
-        category: name,
-        number: i
+        figure.appendChild(img);
+        gallery.appendChild(figure);
       });
     }
-  });
 
-  return images;
-}
+    categoryButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        categoryButtons.forEach(item => {
+          item.classList.remove("active");
+        });
 
-// Display gallery
-function renderGallery(category = 'all') {
-  gallery.innerHTML = '';
-
-  const images = getImages(category);
-  const fragment = document.createDocumentFragment();
-
-  images.forEach((item, index) => {
-    const image = document.createElement('img');
-
-    image.src = item.src;
-    image.alt = `${item.category} ${item.number}`;
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    image.tabIndex = 0;
-    image.setAttribute('role', 'button');
-    image.setAttribute('aria-label', 'Enlarge artwork');
-
-    image.style.animationDelay =
-      `${Math.min(index * 0.04, 0.4)}s`;
-
-    image.addEventListener('click', () => {
-      openLightbox(image);
+        button.classList.add("active");
+        displayGallery(button.dataset.category);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
     });
 
-    image.addEventListener('keydown', event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        openLightbox(image);
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightbox();
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function updateLightbox() {
+      const image = currentImages[currentIndex];
+      lightboxImage.src = image.src;
+      lightboxImage.alt = `${image.category} artwork`;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+      lightboxImage.src = "";
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateLightbox();
+    }
+
+    function showPrevious() {
+      currentIndex =
+        (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateLightbox();
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxNext.addEventListener("click", showNext);
+    lightboxPrev.addEventListener("click", showPrevious);
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) {
+        closeLightbox();
       }
     });
 
-    fragment.appendChild(image);
-  });
+    document.addEventListener("keydown", event => {
+      if (!lightbox.classList.contains("open")) return;
 
-  gallery.appendChild(fragment);
-}
-
-// Category navigation
-navigationButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const category = button.dataset.category;
-
-    navigationButtons.forEach(item => {
-      const active = item === button;
-
-      item.classList.toggle('active', active);
-      item.setAttribute('aria-pressed', active);
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowRight") showNext();
+      if (event.key === "ArrowLeft") showPrevious();
     });
 
-    renderGallery(category);
-  });
-});
+    /* Swipe down to close on mobile */
 
-// Lightbox
-function openLightbox(image) {
-  previousFocus = image;
+    let touchStartY = 0;
 
-  lightboxImage.src = image.src;
-  lightboxImage.alt = image.alt;
+    lightbox.addEventListener("touchstart", event => {
+      touchStartY = event.changedTouches[0].screenY;
+    }, { passive: true });
 
-  lightbox.classList.add('open');
-  document.body.classList.add('lightbox-open');
+    lightbox.addEventListener("touchend", event => {
+      const touchEndY = event.changedTouches[0].screenY;
+      const distance = touchEndY - touchStartY;
 
-  closeButton.focus();
-}
+      if (distance > 100) {
+        closeLightbox();
+      }
+    }, { passive: true });
 
-function closeLightbox() {
-  if (!lightbox.classList.contains('open')) return;
-
-  lightbox.classList.remove('open');
-  document.body.classList.remove('lightbox-open');
-
-  lightboxImage.src = '';
-  lightboxImage.alt = '';
-
-  if (previousFocus) {
-    previousFocus.focus();
-  }
-}
-
-closeButton.addEventListener('click', closeLightbox);
-
-lightbox.addEventListener('click', event => {
-  if (event.target === lightbox ||
-      event.target === lightboxImage) {
-    closeLightbox();
-  }
-});
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    closeLightbox();
-  }
-});
-
-// Close lightbox by swiping down
-let touchStartY = 0;
-
-lightbox.addEventListener('touchstart', event => {
-  touchStartY = event.changedTouches[0].screenY;
-}, { passive: true });
-
-lightbox.addEventListener('touchend', event => {
-  const touchEndY = event.changedTouches[0].screenY;
-
-  if (touchEndY - touchStartY > 120) {
-    closeLightbox();
-  }
-}, { passive: true });
-
-// Initial gallery
-renderGallery('all');
-
-</script>
+    displayGallery("all");
+  </script>
 
 </body>
 </html>
