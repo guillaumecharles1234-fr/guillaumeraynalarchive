@@ -106,10 +106,6 @@ footer a:hover {
     color: #222;
 }
 
-.footer-note {
-    color: #888;
-}
-
 /* Lightbox */
 
 .lightbox {
@@ -212,8 +208,10 @@ footer a:hover {
     <a href="mailto:guillaumeraynal.contact@gmail.com">
         guillaumeraynal.contact@gmail.com
     </a>
+
     <p>© 2026 Guillaume Raynal</p>
-    <p class="footer-note">
+
+    <p>
         All work shown here has been done without generative AI.
     </p>
 </footer>
@@ -228,16 +226,16 @@ footer a:hover {
 <script>
 const categories = {
     illustration: {
-        first: 1,
-        last: 7
+        first: 7,
+        last: 1
     },
     studies: {
-        first: 1,
-        last: 27
+        first: 27,
+        last: 1
     },
     gestures: {
-        first: 6,
-        last: 48
+        first: 48,
+        last: 6
     }
 };
 
@@ -251,14 +249,14 @@ function getImages(category) {
     const data = categories[category];
     const images = [];
 
-    for (let i = data.first; i <= data.last; i++) {
+    for (let i = data.first; i >= data.last; i--) {
         images.push({
             category: category,
             src: `${category}/${i}.webp`
         });
     }
 
-    return images.reverse();
+    return images;
 }
 
 function renderGallery(category = "all") {
@@ -274,7 +272,7 @@ function renderGallery(category = "all") {
         images = getImages(category);
     }
 
-    // Each image appears only once in the gallery.
+    // Remove duplicate image paths
     const uniqueImages = [
         ...new Map(images.map(image => [image.src, image])).values()
     ];
@@ -285,7 +283,7 @@ function renderGallery(category = "all") {
 
         const img = document.createElement("img");
         img.src = item.src;
-        img.alt = `${item.category} artwork`;
+        img.alt = `${item.category} artwork ${item.src}`;
         img.loading = "lazy";
 
         img.addEventListener("click", () => {
