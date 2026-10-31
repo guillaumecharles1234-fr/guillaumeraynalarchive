@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Guillaume Raynal — Concept Art / Illustration</title>
 
 <style>
@@ -36,6 +37,8 @@ h1 {
     color: #777;
 }
 
+/* Navigation */
+
 nav {
     display: flex;
     gap: 24px;
@@ -50,7 +53,7 @@ nav button {
     font: inherit;
     font-size: 13px;
     cursor: pointer;
-    padding: 0 0 5px;
+    padding: 0;
 }
 
 nav button:hover,
@@ -58,9 +61,7 @@ nav button.active {
     color: #222;
 }
 
-nav button.active {
-    border-bottom: 1px solid #222;
-}
+/* Gallery */
 
 .gallery {
     display: grid;
@@ -88,24 +89,25 @@ nav button.active {
 /* Footer */
 
 footer {
-    margin-top: 70px;
-    padding-top: 20px;
-    border-top: 1px solid #dedbd4;
+    margin-top: 65px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+    flex-direction: column;
+    gap: 9px;
     font-size: 12px;
     color: #888;
 }
 
 footer a {
-    color: #666;
+    color: #777;
     text-decoration: none;
 }
 
 footer a:hover {
     color: #222;
+}
+
+.footer-note {
+    color: #888;
 }
 
 /* Lightbox */
@@ -153,6 +155,8 @@ footer a:hover {
 .next {
     right: 15px;
 }
+
+/* Mobile */
 
 @media (max-width: 650px) {
     body {
@@ -205,10 +209,13 @@ footer a:hover {
 <main class="gallery" id="gallery"></main>
 
 <footer>
-    <span>© 2026 Guillaume Raynal</span>
     <a href="mailto:guillaumeraynal.contact@gmail.com">
-        Contact
+        guillaumeraynal.contact@gmail.com
     </a>
+    <p>© 2026 Guillaume Raynal</p>
+    <p class="footer-note">
+        All work shown here has been done without generative AI.
+    </p>
 </footer>
 
 <div class="lightbox" id="lightbox">
@@ -221,16 +228,16 @@ footer a:hover {
 <script>
 const categories = {
     illustration: {
-        count: 7,
-        first: 1
+        first: 1,
+        last: 7
     },
     studies: {
-        count: 27,
-        first: 1
+        first: 1,
+        last: 27
     },
     gestures: {
-        count: 43,
-        first: 5
+        first: 6,
+        last: 48
     }
 };
 
@@ -244,7 +251,7 @@ function getImages(category) {
     const data = categories[category];
     const images = [];
 
-    for (let i = data.first; i < data.first + data.count; i++) {
+    for (let i = data.first; i <= data.last; i++) {
         images.push({
             category: category,
             src: `${category}/${i}.webp`
@@ -267,7 +274,12 @@ function renderGallery(category = "all") {
         images = getImages(category);
     }
 
-    images.forEach((item, index) => {
+    // Each image appears only once in the gallery.
+    const uniqueImages = [
+        ...new Map(images.map(image => [image.src, image])).values()
+    ];
+
+    uniqueImages.forEach((item, index) => {
         const container = document.createElement("div");
         container.className = "artwork";
 
@@ -277,7 +289,7 @@ function renderGallery(category = "all") {
         img.loading = "lazy";
 
         img.addEventListener("click", () => {
-            currentImages = images;
+            currentImages = uniqueImages;
             currentIndex = index;
             openLightbox();
         });
@@ -286,6 +298,8 @@ function renderGallery(category = "all") {
         gallery.appendChild(container);
     });
 }
+
+// Category filters
 
 filters.forEach(button => {
     button.addEventListener("click", () => {
